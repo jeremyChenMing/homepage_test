@@ -1,0 +1,33 @@
+a{
+    text-decoration: none;
+}
+
+input{
+    border:0;
+    outline: 0;
+}
+
+ul,li{
+    list-style: none;
+}
+
+
+button,select{
+    -webkit-user-select: none;
+    &:focus{
+        outline: none;
+    }
+}
+
+button{
+    background: @themeColor;
+    color:@white;
+    font-size:@font-size-md;
+    border-radius:5px;
+    padding:9px 28px;
+    transition: background ease 100ms;
+
+    &:active{
+        background: fadeout(@themeColor,50%);
+    }
+}

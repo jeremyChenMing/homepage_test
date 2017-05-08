@@ -27,15 +27,18 @@ module.exports = {
 	                    'react', 
 	                    // 'es2015',
 	                    'env',
-	                ]
-	             }
+	                ],
+	                plugins: [
+					    ["import", { libraryName: "antd", style: true }] // `style: true` 会加载 less 文件
+					]
+	            }
 		      }]
 	    },{
 	    	test: /\.less$/,
 	    	use: [
-	    		'style-loader',
-			    'css-loader',
-			    'less-loader'
+	    		{ loader :'style-loader'},
+			    { loader :'css-loader?modules=true&localIdentName=[name]_[local]_[hash:base64:3]'},
+			    { loader :'less-loader'}
 	    	]
 	    }
 	    ,{
@@ -44,7 +47,7 @@ module.exports = {
             	loader: 'url-loader',
             	query: {
             		limit: 8192,
-            		name: 'images/[hash:3].[name].[ext]'
+            		name: 'images/[name].[ext]'
             	}
             }]
 	    }

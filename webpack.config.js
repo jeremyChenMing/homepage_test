@@ -8,7 +8,7 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 const isPro = nodeEnv === 'production';
 
 const config = {
-	devtool: 'source-map',//配置生成Source Maps，选择合适的选项
+	devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
   	entry:  ['webpack-hot-middleware/client', __dirname + "/src/main.js"],//已多次提及的唯一入口文件
 	output : {
 		filename: 'bundle.js',
@@ -23,8 +23,8 @@ const config = {
 				{
 					loader : 'babel-loader',
 					query:{  
-	                babelrc: false,
-	                presets: [
+	                	babelrc: false,
+	                	presets: [
 		                    'react', 
 		                    // 'es2015',
 		                    'env',
@@ -44,7 +44,11 @@ const config = {
 		                    ]
 		                  }
 		                },  
-		            }
+		                plugins: [
+						    ["import", { libraryName: "antd", style: 'css' }] // `style: true` 会加载 less 文件
+						]
+		            },
+		            
 				}
 			]
 		}, {
@@ -60,7 +64,8 @@ const config = {
             	loader: 'url-loader',
             	query: {
             		limit: 8192,
-            		name: 'images/[hash:3].[name].[ext]'
+            		// name: 'images/[hash:3].[name].[ext]'
+            		name: 'images/[name].[ext]'
             	}
             }]
 	    }
