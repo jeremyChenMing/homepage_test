@@ -16,7 +16,7 @@ let store=configureStore();
 
 
 
-console.log('hha',__dev__, typeof __dev__)
+console.log('haha',__dev__, typeof __dev__)
 
 
 
