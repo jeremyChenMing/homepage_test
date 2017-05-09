@@ -88,8 +88,7 @@ module.exports = {
         new HtmlWebpackPlugin({
         	filename: 'index.html',
             template: "./home.html",  //new 一个这个插件的实例，并传入相关的参数
-            vendorName: Manifest.name + '.js',
-        	inject: true
+            // hash : true
         }),
         new webpack.DllReferencePlugin({
 		  	context: path.resolve(__dirname,'./src'), // 指定一个路径作为上下文环境，需要与DllPlugin的context参数保持一致，建议统一设置为项目根目录
