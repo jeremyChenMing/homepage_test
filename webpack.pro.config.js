@@ -7,6 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isPro = nodeEnv === 'production';
+const Manifest = require('./manifest.json');
 
 module.exports = {
 	entry: './src/main.js',
@@ -29,7 +30,7 @@ module.exports = {
 	                    'env',
 	                ],
 	                plugins: [
-					    ["import", { libraryName: "antd", style: true }] // `style: true` 会加载 less 文件
+					    ["import", { libraryName: "antd", style: 'css' }] // `style: true` 会加载 less 文件
 					]
 	            }
 		      }]
@@ -85,7 +86,10 @@ module.exports = {
 		   "__dev__": JSON.stringify(isPro) 
 		}),
         new HtmlWebpackPlugin({
-            template: "./home.html"  //new 一个这个插件的实例，并传入相关的参数
+        	filename: 'index.html',
+            template: "./home.html",  //new 一个这个插件的实例，并传入相关的参数
+            vendorName: Manifest.name + '.js',
+        	inject: true
         }),
         new webpack.DllReferencePlugin({
 		  	context: path.resolve(__dirname,'./src'), // 指定一个路径作为上下文环境，需要与DllPlugin的context参数保持一致，建议统一设置为项目根目录
