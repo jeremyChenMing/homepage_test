@@ -10,7 +10,8 @@ const vendors = [
   'react-redux',
   'react-router',
   'redux',
-  'redux-form'
+  'redux-form',
+  'redux-thunk',
 ];
 
 module.exports = {
