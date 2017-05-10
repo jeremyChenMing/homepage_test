@@ -8,7 +8,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isPro = nodeEnv === 'production';
 const Manifest = require('./manifest.json');
-
+console.log('生产环境配置相')
 module.exports = {
 	entry: './src/main.js',
 	output: {
