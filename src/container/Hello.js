@@ -26,7 +26,8 @@ class Hello  extends React.Component {
 		return(
 			<div className={cx(l.box)}>
 				hello world!!!123
-				<img src={require("../public/images/3.jpg")} alt=""/>
+				{/*<img src={require("../public/images/3.jpg")} alt=""/>*/}
+				<img src="/images/3.jpg" alt="1"/>
 				<div className={cx(l.bg)}>
 					this props value is {this.props.value}
 				</div>
