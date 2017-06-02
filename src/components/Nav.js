@@ -18,10 +18,10 @@ class Nav  extends React.Component {
 		
 	}
 	render() {
-		console.log(this.props)
 		return(
 			<div >
-				nav
+				<p style={{height:200}}>nav</p>
+				<p style={{height:200}}>nav</p>
 			</div>
 		)
 	}

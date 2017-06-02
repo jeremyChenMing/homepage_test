@@ -1,0 +1,44 @@
+@import "../less/variables";
+
+.header{
+	width: 100%;
+	background-color: @black;
+	line-height: 80px;
+	.con{
+		display: flex;
+		width: 1024px;
+		margin: 0 auto;
+		font-size: 22px;
+	}
+	li{
+		width: 160px;
+		text-align: center;
+	}
+	a{
+		color: @white;
+		text-decoration: none;
+		display: inline-block;
+		height: 80px;
+		border-bottom: 2px solid transparent;
+	}
+	
+}
+:global {
+	body .active{
+		border-color: @themeColor;
+		color: @themeColor;
+	}	
+}
+
+
+.content{
+	width: 100%;
+}
+
+
+.footer{
+	width: 100%;
+	background-color: #fcf;
+	position: fixed;
+	bottom: 0;
+}
