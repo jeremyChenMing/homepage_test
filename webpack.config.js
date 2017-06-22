@@ -9,9 +9,15 @@ const isPro = nodeEnv === 'production';
 
 const config = {
 	devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
-  	entry:  ['webpack-hot-middleware/client', __dirname + "/src/main.js"],//已多次提及的唯一入口文件
+  	// entry:  ['webpack-hot-middleware/client', __dirname + "/src/main.js"],//已多次提及的唯一入口文件
+  	entry:  { //提取公共包
+  		main:['webpack-hot-middleware/client', __dirname + "/src/main.js"],//已多次提及的唯一入口文件
+  		vendor: ['moment','react','react-dom','react-redux','react-router','react-router-dom']
+  	},
 	output : {
-		filename: 'bundle.js',
+		// filename: 'bundle.js',
+		filename: '[name].[hash:6].js',
+        // chunkFilename: "[name].[chunkhash:6].js",
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: '/'
 	},
@@ -64,8 +70,8 @@ const config = {
             	loader: 'url-loader',
             	query: {
             		limit: 8192,
-            		// name: 'images/[hash:3].[name].[ext]'
-            		name: 'images/[name].[ext]'
+            		name: 'images/[hash:3].[name].[ext]'  //这种方式引发需要require 才会带有hash，如果用／的话，css是不解析的
+            		// name: 'images/[name].[ext]'
             	}
             }]
 	    }
@@ -85,7 +91,7 @@ const config = {
             use: [{
             	loader: 'file-loader',
             	query: {
-            		name: 'files/[name].[ext]'
+            		name: 'files/[hash:3].[name].[ext]'
             	}
             }],
 	    }]
@@ -104,7 +110,10 @@ const config = {
 		   },
 		   "__dev__": JSON.stringify(isPro) 
 		}),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin(), //应用了这个就不可以在应用chunkhash，而只能应用hash才可以，所以热更新的时候CommonsChunkPlugin并不会起作用，顶多分离包
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest'], // 指定公共 bundle 的名字。
+        })
 	]
 }
 

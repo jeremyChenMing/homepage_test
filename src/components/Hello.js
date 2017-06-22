@@ -25,7 +25,7 @@ class Hello  extends React.Component {
 	render() {
 		return(
 			<div className={cx(l.box)}>
-				hello world!!!123
+				hello world!!!111111
 				{/*<img src={require("../public/images/3.jpg")} alt=""/>*/}
 				<img src="/images/3.jpg" alt="1"/>
 				<div className={cx(l.bg)}>
