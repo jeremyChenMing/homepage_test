@@ -34,6 +34,8 @@ class Header extends React.Component {
 			this.setState({active:'about'})
 		}else if (location.pathname.indexOf("/home/task") != -1) {
 			this.setState({active:'task'})
+		}else if (location.pathname.indexOf("/home/attendce") != -1) {
+			this.setState({active:'attendce'})
 		}else{
 			this.setState({active:'home'})
 		}
@@ -61,6 +63,7 @@ class Header extends React.Component {
 			        <li><Link onClick={this.clickTwo} to={`${match.url}/other`} className={cx( active=='other' ? 'active' : null)}>Other</Link></li>
 			        <li><Link onClick={this.clickThr} to={`${match.url}/about/12345678`} className={cx( active=='about' ? 'active' : null)}>About</Link></li>
 			        <li><Link onClick={this.clickFour} to={`${match.url}/task`} className={cx( active=='task' ? 'active' : null)}>Task</Link></li>
+			        <li><Link onClick={this.clickFour} to={`${match.url}/attendce`} className={cx( active=='attendce' ? 'active' : null)}>Attendce</Link></li>
 		        </ul>		
 			</div>
 		)
