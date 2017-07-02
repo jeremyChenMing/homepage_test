@@ -31,7 +31,7 @@ class Home extends React.Component{
 		const {location,history,match} = this.props;
 		return(
 			<div>
-		      	<Header match={match} />
+		      	<Header {...this.props} />
 		      	<Content {...this.props} />
 			</div>
 		)
