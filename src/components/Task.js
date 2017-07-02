@@ -30,6 +30,11 @@ class Task extends React.Component {
 				<p>的金额可理解啊快结束了空间的啊深刻的肌肤啊快睡觉啊</p>
 				<p>的金额可理解啊快结束了空间的啊深刻的肌肤啊快睡觉啊</p>
 				<p>的金额可理解啊快结束了空间的啊深刻的肌肤啊快睡觉啊</p>
+
+				<Button>attendce</Button>
+				<Button>attendce</Button>
+				<Button>attendce</Button>
+				<Button>attendce</Button>
 			</div>
 		)
 	}
