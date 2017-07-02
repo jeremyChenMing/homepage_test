@@ -21,8 +21,21 @@ class Header extends React.Component {
 		this.clickOne = this.clickOne.bind(this);
 		this.clickTwo = this.clickTwo.bind(this);
 		this.clickThr = this.clickThr.bind(this);
+		this.clickFour = this.clickFour.bind(this);
 		this.state = {
 			active: 'home'
+		}
+	}
+	componentDidMount() {
+		const { location , match } = this.props;
+		if (location.pathname.indexOf("/home/other") != -1) {
+			this.setState({active:'other'})
+		}else if (location.pathname.indexOf("/home/about") != -1) {
+			this.setState({active:'about'})
+		}else if (location.pathname.indexOf("/home/task") != -1) {
+			this.setState({active:'task'})
+		}else{
+			this.setState({active:'home'})
 		}
 	}
 	clickOne() {
@@ -34,6 +47,9 @@ class Header extends React.Component {
 	clickThr() {
 		this.setState({active:'about'})
 	}
+	clickFour() {
+		this.setState({active:'task'})
+	}
 	render() {
 		const { match } = this.props;
 		const { active } = this.state;
@@ -44,6 +60,7 @@ class Header extends React.Component {
 			        <li><Link onClick={this.clickOne} to={`${match.url}`} className={cx( active=='home' ? 'active' : null)}>Home</Link></li>
 			        <li><Link onClick={this.clickTwo} to={`${match.url}/other`} className={cx( active=='other' ? 'active' : null)}>Other</Link></li>
 			        <li><Link onClick={this.clickThr} to={`${match.url}/about/12345678`} className={cx( active=='about' ? 'active' : null)}>About</Link></li>
+			        <li><Link onClick={this.clickFour} to={`${match.url}/task`} className={cx( active=='task' ? 'active' : null)}>Task</Link></li>
 		        </ul>		
 			</div>
 		)

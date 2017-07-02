@@ -70,8 +70,8 @@ const config = {
             	loader: 'url-loader',
             	query: {
             		limit: 8192,
-            		name: 'images/[hash:3].[name].[ext]'  //这种方式引发需要require 才会带有hash，如果用／的话，css是不解析的
-            		// name: 'images/[name].[ext]'
+            		// name: 'images/[hash:3].[name].[ext]'  //这种方式引发需要require 才会带有hash，如果用／的话，css是不解析的
+            		name: 'images/[name].[ext]'
             	}
             }]
 	    }
@@ -91,7 +91,8 @@ const config = {
             use: [{
             	loader: 'file-loader',
             	query: {
-            		name: 'files/[hash:3].[name].[ext]'
+            		// name: 'files/[hash:3].[name].[ext]',
+            		name: 'files/[name].[ext]'
             	}
             }],
 	    }]
