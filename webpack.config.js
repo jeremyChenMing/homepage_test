@@ -112,7 +112,7 @@ const config = {
 		}),
         new webpack.HotModuleReplacementPlugin(), //应用了这个就不可以在应用chunkhash，而只能应用hash才可以，所以热更新的时候CommonsChunkPlugin并不会起作用，顶多分离包
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor', 'manifest'], // 指定公共 bundle 的名字。
+            names: ['vendor', 'manifest'], // 指定公共 bundle 的名字。这个只适合在打包的时候用，不适合开发用
         })
 	]
 }
