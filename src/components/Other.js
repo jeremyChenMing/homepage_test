@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {ReactDOM} from 'react-dom';
-import { Button } from 'antd';
+import { Button,Input } from 'antd';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import l from './main.less';
@@ -23,7 +23,7 @@ class Other extends React.Component {
 		
 	}
 	componentDidMount() {
-
+		
 	}
 	Topic({match}) {
 		return(
@@ -35,9 +35,15 @@ class Other extends React.Component {
 	}
 	render() {
 		const { match } = this.props;
+		const obj = {
+			key:'name',
+			value:'cell',
+			ard:'62220208099788976776',
+		}
 		return(
 			<div>
-				<h1>a  new  page</h1>
+				<h1 >a  new  page</h1>
+				<Input {...obj}></Input>
 				<ul>
 					<li><Link to={`${match.url}/rendering`}>get back</Link></li>
 				</ul>
