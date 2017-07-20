@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import l from './main.less';
 import {environment} from '../redux/actions/environment';
-
+import moment from 'moment'
 import {
   HashRouter as Router,
   Route,   // 这是基本的路由块
@@ -23,7 +23,7 @@ class Other extends React.Component {
 		
 	}
 	componentDidMount() {
-		
+
 	}
 	Topic({match}) {
 		return(

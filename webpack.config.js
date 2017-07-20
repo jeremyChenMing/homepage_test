@@ -103,6 +103,7 @@ const config = {
 	plugins : [
 		new ExtractTextPlugin('css/[name].css'),
 		new HtmlWebpackPlugin({
+			inject  : 'body',
             template: "./home.html"  //new 一个这个插件的实例，并传入相关的参数
         }),
         new webpack.DefinePlugin({

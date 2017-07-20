@@ -10,51 +10,115 @@ import {
   Redirect, // 这是重定向
   Prompt,   // 防止转换
 } from 'react-router-dom'
+import { Tree } from 'antd';
+const TreeNode = Tree.TreeNode;
 
 import Other from './Other';
 import {Button, TimePicker} from 'antd';
 import moment from 'moment';
 
+
+function generateTreeNodes(treeNode) {
+  const arr = [];
+  const key = treeNode.props.eventKey;
+  for (let i = 0; i < 3; i++) {
+    arr.push({ name: `leaf ${key}-${i}`, key: `${key}-${i}` });
+  }
+  return arr;
+}
+
+function setLeaf(treeData, curKey, level) {
+  const loopLeaf = (data, lev) => {
+    const l = lev - 1;
+    data.forEach((item) => {
+      if ((item.key.length > curKey.length) ? item.key.indexOf(curKey) !== 0 :
+        curKey.indexOf(item.key) !== 0) {
+        return;
+      }
+      if (item.children) {
+        loopLeaf(item.children, l);
+      } else if (l < 1) {
+        item.isLeaf = true;
+      }
+    });
+  };
+  loopLeaf(treeData, level + 1);
+}
+
+function getNewTreeData(treeData, curKey, child, level) {
+  const loop = (data) => {
+    if (level < 1 || curKey.length - 3 > level * 2) return;
+    data.forEach((item) => {
+      if (curKey.indexOf(item.key) === 0) {
+        if (item.children) {
+          loop(item.children);
+        } else {
+          item.children = child;
+        }
+      }
+    });
+  };
+  loop(treeData);
+  setLeaf(treeData, curKey, level);
+}
+
+
 class Nav  extends React.Component {
 	constructor(props) {
 		super(props);
-		this.time1= this.time1.bind(this);
-		this.time2= this.time2.bind(this);
+		this.onSelect = this.onSelect.bind(this)
+		this.onLoadData = this.onLoadData.bind(this)
 		this.state = {
-			time1:'',
-			time2:''
+			treeData: [],
 		}
 	}
-	time1(time,timestring) {
-		console.log(time)
-		this.setState({
-			time1:time
-		})
-	}
-	time2(time,timestring) {
-		console.log(time)
-		this.setState({
-			time2:time
-		})
+
+	componentDidMount() {
+	    setTimeout(() => {
+	      this.setState({
+	        treeData: [
+	          { name: 'pNode 01', key: '0-0' },
+	          { name: 'pNode 02', key: '0-1' },
+	          { name: 'pNode 03', key: '0-2', isLeaf: true },
+	        ],
+	      });
+	    }, 100);
 	}
 
+	onSelect (info) {
+	    console.log('selected', info);
+	}
+	onLoadData (treeNode) {
+	    return new Promise((resolve) => {
+	      setTimeout(() => {
+	        const treeData = [...this.state.treeData];
+	        getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
+	        this.setState({ treeData });
+	        resolve();
+	      }, 1000);
+	    });
+  	}
+
 	render() {
-		const format = 'HH:mm';
-		const {time1,time2} = this.state;
-		const a = moment(time1)
-		const b = moment(time2)
-		// const c = b.diff(a, 'hours') // 1
-		const c = b.diff(a) // 毫秒
-		console.log(c)
-		const h = c / 1000 / 3600 
-		console.log(h)
+		const loop = data => data.map((item) => {
+      	if (item.children) {
+	        return <TreeNode title={item.name} key={item.key}>{loop(item.children)}</TreeNode>;
+	    }
+	      return <TreeNode title={item.name} key={item.key} isLeaf={item.isLeaf} disabled={item.key === '0-0-0'} />;
+	    });
+	    console.log(this.state.treeData)
+	    const treeNodes = loop(this.state.treeData);
+	    
 		return(
 			<div >
 				<p style={{height:200}}>nav</p>
-				<Button>anniu</Button>
-
-				<TimePicker onChange={this.time1} format={format} />
-				<TimePicker onChange={this.time2}  format={format} />
+				<Tree 
+				onSelect={this.onSelect} 
+				loadData={this.onLoadData}
+				defaultSelectedKeys={['0-0']}
+				>
+			        {treeNodes}
+			    </Tree>
 			</div>
 		)
 	}

@@ -16,6 +16,8 @@ import Nav from '../components/Nav';
 import Hello from '../components/Hello';
 import Other from '../components/Other';
 import Task from '../components/Task';
+import Attendce from '../components/Attendce';
+
 
 
 class Content extends React.Component {
@@ -31,6 +33,7 @@ class Content extends React.Component {
 		     	<Route path={`${match.url}/other`} component={Other}/>
 		     	<Route path={`${match.url}/about/:id`} component={Hello}/>	
 		     	<Route path={`${match.url}/task`} component={Task}/>	
+		     	<Route path={`${match.url}/attendce`} component={Attendce}/>	
 			</div>
 		)
 	}

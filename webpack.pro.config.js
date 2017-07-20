@@ -4,7 +4,6 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isPro = nodeEnv === 'production';
 const Manifest = require('./manifest.json');
@@ -24,6 +23,7 @@ module.exports = {
 		        loader: 'babel-loader',
 		        query:{  
 	                babelrc: false,
+	                // cacheDirectory:true,  //开启缓存模式  默认是false
 	                presets: [
 	                    'react', 
 	                    // 'es2015',
@@ -71,12 +71,17 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [".js", ".json", ".jsx", ".css", "scss"],
+		// alias: { 'react': 'react/dist/react.js', }, //配置路径的映射  减少文件递归解析
+		// modules: [path.resolve(__dirname, 'node_modules')], //指定import路径到本地的node_modules,不用向上递归去搜索，可以减少时间
 	},
 	plugins: [
         new ExtractTextPlugin('css/[name].css'),
         new webpack.optimize.UglifyJsPlugin({
 		    compress: {
-		      warnings: false,
+		      warnings: false, //删除没有用到的代码时候不输入警告
+		      drop_console: true, //删除所有的console语句
+		      // beautify: false, //最紧凑的输出
+		      // comments: false, //删除所有的注视
 		    }
 		}),
 		new webpack.DefinePlugin({
@@ -85,7 +90,9 @@ module.exports = {
 		   },
 		   "__dev__": JSON.stringify(isPro) 
 		}),
+
         new HtmlWebpackPlugin({
+        	inject  : 'body',
         	filename: 'index.html',
             template: "./home.html",  //new 一个这个插件的实例，并传入相关的参数
             // hash : true
