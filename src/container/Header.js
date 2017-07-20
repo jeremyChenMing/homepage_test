@@ -55,7 +55,7 @@ class Header extends React.Component {
 	render() {
 		const { match } = this.props;
 		const { active } = this.state;
-		console.log(this.props)
+		// console.log(this.props)
 		return(
 			<div className={cx(l.header)}>
 				<ul className={cx(l.con)}>
