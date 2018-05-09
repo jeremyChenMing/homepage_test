@@ -18,6 +18,24 @@ import Content from './Content';
 import Footer from './Footer';
 
 
+class Demo extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+
+		}
+	}
+	render() {
+		return(
+			<div style={{height:'100px'}}>
+				demo
+				<span onClick={this.click}>哈哈哈</span>
+			</div>
+		)
+	}
+}
+
+
 
 class Home extends React.Component{
 	constructor(props) {
@@ -32,6 +50,7 @@ class Home extends React.Component{
 		return(
 			<div>
 		      	<Header {...this.props} />
+		      	<Demo></Demo>
 		      	<Content {...this.props} />
 			</div>
 		)

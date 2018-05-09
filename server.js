@@ -28,10 +28,28 @@ app.use(webpackDevMiddleware(compiler, {
   }
 
 }));
+//  --------------------------------------->  代理部分
 
+var httpProxy = require('http-proxy');
+
+// var proxy = httpProxy.createProxyServer(options)
+
+// Add middleware for http proxying
+
+
+const proxy = require('http-proxy-middleware');//引入代理中间件
+const apiProxy = proxy('/api', { target: 'http://localhost:8080',changeOrigin: true });//将服务器代理到localhost:8080端口上[本地服务器为localhost:3000]
+// const apiProxy = proxy('/api', { target: 'http://api.hrbp.d.upvi.com',changeOrigin: true });
+// app.use('/', apiProxy);//api子目录下的都是用代理
+
+
+
+// <--------------------------------------
 
 app.use(webpackHotMiddleware(compiler));
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname,'src' , 'public')));
+
+
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

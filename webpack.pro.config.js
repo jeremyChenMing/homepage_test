@@ -79,7 +79,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
 		    compress: {
 		      warnings: false, //删除没有用到的代码时候不输入警告
-		      drop_console: true, //删除所有的console语句
+		      drop_console: true, //删除所有的console语句npm
 		      // beautify: false, //最紧凑的输出
 		      // comments: false, //删除所有的注视
 		    }

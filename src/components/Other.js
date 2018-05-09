@@ -17,12 +17,50 @@ import {
 } from 'react-router-dom'
 
 
+
+
+var InputandButtom = React.createClass({
+    addData:function(){
+        var addText = this.refs.inputext.value
+        console.log(addText)
+        var addIndate = this.props.data
+        addIndate.push({
+            text:addText,
+            key:Date.now()
+        })
+        this.setState({
+            data:addIndate
+        })
+        
+    },
+    render:function(){
+        return(
+            <form>
+                <input type="text" ref="inputext" />
+                <button onClick={this.addData}>save</button>
+            </form>
+        )
+    }
+})
+
+
+
+
+
+
+
+import fetch from '../utils/fetch.js'
+
 class Other extends React.Component {
 	constructor(props) {
 		super(props);
 		
 	}
 	componentDidMount() {
+		// fetch.get('/api/v1/enterprise/account/info', {}).then( data => {
+		// fetch.get('/api/world', {}).then( data => {
+		// 	console.log(data)
+		// })
 		
 	}
 	Topic({match}) {
@@ -47,6 +85,9 @@ class Other extends React.Component {
 				<ul>
 					<li><Link to={`${match.url}/rendering`}>get back</Link></li>
 				</ul>
+
+
+				<InputandButtom data={[]}></InputandButtom>
 				<Route exact path={match.url} render={() => (
 			      	<h3>Please select a topic.</h3>
 			    )}/>

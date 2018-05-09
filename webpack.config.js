@@ -31,9 +31,10 @@ const config = {
 					query:{  
 	                	babelrc: false,
 	                	presets: [
+                			'env',
 		                    'react', 
-		                    // 'es2015',
-		                    'env',
+		                    'es2015',
+		                    
 		                ],
 		                env:{
 		                  development:{
