@@ -15,7 +15,7 @@ class Start extends React.Component {
 	render() {
 		return(
 			<div>
-				start page!!!
+				start page!!!!!!!!---
 				<a href="#/home">进入主页</a>		
 			</div>
 		)
