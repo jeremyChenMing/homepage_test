@@ -63,7 +63,9 @@ const config = {
 			use: [
 	    		{ loader :'style-loader'},
 			    { loader :'css-loader?modules=true&localIdentName=[name]_[local]_[hash:base64:3]'},
+          { loader: 'px2rem-loader?remUnit=20&remPrecision=2'},
 			    { loader :'less-loader'}
+         
 	    	]
 		},{
 	    	test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -78,15 +80,28 @@ const config = {
 	    }
 	    ,{
 	    	test: /\.css$/,
+	        // // use: ExtractTextPlugin.extract({
+	        // //   fallback: "style-loader",
+	        // //   use: "css-loader",
+	        // //   publicPath:'/'
+	        // // })
 	        // use: ExtractTextPlugin.extract({
-	        //   fallback: "style-loader",
-	        //   use: "css-loader",
-	        //   publicPath:'/'
+	        // 	// use: 'css-loader?modules=true&localIdentName=[name]_[local]_[hash:base64:3]'
+	        // 	use: 'css-loader'
 	        // })
-	        use: ExtractTextPlugin.extract({
-	        	// use: 'css-loader?modules=true&localIdentName=[name]_[local]_[hash:base64:3]'
-	        	use: 'css-loader'
-	        })
+
+          use: [{
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader'
+          }, {
+            loader: 'px2rem-loader',
+            // options here
+            options: {
+              remUnit: 20,
+              remPrecision: 2
+            }
+          }]
 	    },{
 	    	test: /\.(eot|ttf|wav|mp3)$/,
             use: [{
@@ -102,7 +117,7 @@ const config = {
 		extensions: [".js", ".json", ".jsx", ".css", "less"],
 	},
 	plugins : [
-		new ExtractTextPlugin('css/[name].css'),
+		// new ExtractTextPlugin('css/[name].css'),
 		new HtmlWebpackPlugin({
 			inject  : 'body',
             template: "./home.html"  //new 一个这个插件的实例，并传入相关的参数

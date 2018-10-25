@@ -1,6 +1,7 @@
 import React from 'react';
 import {ReactDOM} from 'react-dom';
 import cx from 'classnames';
+import './test.css'
 // import l from './Index.less';
 
 
@@ -14,7 +15,7 @@ class Start extends React.Component {
 	}
 	render() {
 		return(
-			<div>
+			<div className="box">
 				start page!!!!!!!!---
 				<a href="#/home">进入主页</a>		
 			</div>
